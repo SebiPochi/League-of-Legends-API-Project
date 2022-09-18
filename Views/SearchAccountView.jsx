@@ -21,6 +21,7 @@ const SearchAccountView = () => {
     const BuscarInvocador = async() => {
         try {
             const response = await axios.get(`https://la2${baseUrl}${textValue}?api_key=${API_KEY}`)
+            setIsTheAccountFav(isTheAccountOn(response.data))
             setData(response.data)
             setError([])
         }
@@ -29,10 +30,6 @@ const SearchAccountView = () => {
             setData([])
             console.log(error);
         }
-        finally{
-            await setIsTheAccountFav(isTheAccountOn(data))
-        }
-
     }
 
     function isEmpty(obj) {
@@ -84,5 +81,8 @@ const windowHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
     search: {
         flexDirection: 'row'
+    },
+    infoText: {
+
     }
 })

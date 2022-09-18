@@ -4,7 +4,6 @@ const FavAccountContext = createContext()
 
 export function AccountProvider({ children }) {
     const [favAccounts, setFavAccounts] = useState([])
-    
     const addAccount = ( account ) => {
         setFavAccounts((prevState) => [...prevState, account ])
     }

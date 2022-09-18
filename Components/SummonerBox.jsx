@@ -6,13 +6,19 @@ import FavAccountContext from '../Context/FavAccountContext'
 const SummonerBox = ({ data, isOnFavourites }) => {
     const { addAccount, deleteAccount } = useContext(FavAccountContext)
     const [isFaved, setIsFaved] = useState(isOnFavourites)
+    
+    useEffect(() => {
+        setIsFaved(isOnFavourites)
+    }, [])
 
     const FavProfile = () => {
         setIsFaved(!isFaved)
         if (!isFaved) {
             addAccount(data)
+            console.log('estoy addeaddd');
         } else {
             deleteAccount(data)
+            console.log('estoy deleteeadndo');
         }
     }
     

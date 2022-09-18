@@ -29,7 +29,7 @@ const HomeView = ({ navigation }) => {
             {/* <Button title='Modos de juego' onPress={() => navigation.navigate('Pruebas')} /> */}
             {/* <Button title='BORRAR TODO' onPress={deleteAllAccounts}/> */}
             <TouchableOpacity style={styles.search} onPress={() => navigation.navigate('SearchAccount')}>
-                <Ionicons name={'search'} color='blue' size={40} /> 
+                <Ionicons name={'search'} color='#3A7Ef2' size={40} /> 
             </TouchableOpacity>
             {/* <Button title='Buscar Invocador' onPress={() => navigation.navigate('SearchAccount')} /> */}
         </View>

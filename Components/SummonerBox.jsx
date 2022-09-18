@@ -11,10 +11,8 @@ const SummonerBox = ({ data, isOnFavourites }) => {
         setIsFaved(!isFaved)
         if (!isFaved) {
             addAccount(data)
-            console.log('estoy addeaddd');
         } else {
             deleteAccount(data)
-            console.log('estoy deleteeadndo');
         }
     }
     

@@ -7,24 +7,29 @@ export function AccountProvider({ children }) {
     
     const addAccount = ( account ) => {
         setFavAccounts((prevState) => [...prevState, account ])
-        console.log('add');
-        console.log(favAccounts);
     }
 
     const isTheAccountOn = ( account ) => {
+        let isThere = false
         for (let i = 0; i < favAccounts.length; i++) {
             if(favAccounts[i].name === account.name)  {
-                return true
+                isThere = true
             }
+            console.log(i + " " +favAccounts[i].name+ " " +account.name+" "+ isThere);
+            
         }
-    
+        if (isThere) {
+            return true
+        } else {
+            return false
+        }
+
     }
 
     const deleteAllAccounts = () => {
         for (let i = 0; i < favAccounts.length; i++) {
             setFavAccounts(favAccounts.pop())
         }
-        console.log(favAccounts);
     }
 
     const deleteAccount = ( account ) => {
@@ -34,9 +39,7 @@ export function AccountProvider({ children }) {
                 DONDELASTENES = i
             }
         }
-        setFavAccounts(favAccounts.slice(1, DONDELASTENES))
-        console.log('delete');
-        console.log(favAccounts);
+        setFavAccounts(favAccounts.slice(0, DONDELASTENES))
 
     }
 

@@ -19,10 +19,12 @@ const styles = StyleSheet.create({
         width: windowWidth,
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: 30
+        marginVertical: 30,
     },
     textData: {
         backgroundColor: '#fcfcfc',
+        borderWidth: 2,
+        borderColor: '#659dfc',
         width: windowWidth*.7,
         paddingHorizontal: 20,
         paddingVertical: 20,

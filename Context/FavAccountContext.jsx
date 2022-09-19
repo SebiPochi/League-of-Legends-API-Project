@@ -4,6 +4,7 @@ const FavAccountContext = createContext()
 
 export function AccountProvider({ children }) {
     const [favAccounts, setFavAccounts] = useState([])
+    const API_KEY = 'RGAPI-7bd073a4-3dd5-4d6c-b491-75cee474597b'
     const addAccount = ( account ) => {
         setFavAccounts((prevState) => [...prevState, account ])
     }
@@ -43,7 +44,7 @@ export function AccountProvider({ children }) {
     }
 
     return(
-        <FavAccountContext.Provider value={{ favAccounts, addAccount, deleteAccount, isTheAccountOn, deleteAllAccounts}}>
+        <FavAccountContext.Provider value={{ favAccounts, API_KEY, addAccount, deleteAccount, isTheAccountOn, deleteAllAccounts}}>
             {children}
         </FavAccountContext.Provider>
     )

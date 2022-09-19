@@ -7,25 +7,25 @@ import { SearchBar, Button } from '@rneui/themed';
 import InfoText from '../Components/InfoText'
 import { useContext } from 'react'
 import FavAccountContext from '../Context/FavAccountContext'
+import { getSummoner, getChampMastery } from '../Utils/LolApiHelpers'
 
 const SearchAccountView = () => {
-    const { isTheAccountOn } = useContext(FavAccountContext)
+    const { isTheAccountOn, API_KEY } = useContext(FavAccountContext)
     const [data, setData] = useState({})
     const [error, setError] = useState([])
     const [textValue, setTextValue] = useState("")
     const [isTheAccountFav, setIsTheAccountFav] = useState(false)
-    const API_KEY = 'RGAPI-ceac742e-c4c9-4f36-a157-17b0e8ea451d' //?api_key=
-    const baseUrl = '.api.riotgames.com/lol/summoner/v4/summoners/by-name/'
-    // https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/Arcessam?api_key=RGAPI-1069f2b6-48af-4af4-89d1-754836d97b6c
-    
-    const BuscarInvocador = async() => {
+
+    const BuscarInvocador = async () => {
         try {
-            const response = await axios.get(`https://la2${baseUrl}${textValue}?api_key=${API_KEY}`)
-            setIsTheAccountFav(isTheAccountOn(response.data))
-            setData(response.data)
+            const summonerName = textValue.trim()
+            const summoner = await getSummoner(summonerName)
+            setIsTheAccountFav(isTheAccountOn(summoner))
+            setData(summoner)
+            console.log("DATA: ", data);
             setError([])
         }
-        catch (error){
+        catch (error) {
             setError(error)
             setData([])
             console.log(error);
@@ -37,40 +37,42 @@ const SearchAccountView = () => {
     }
 
     return (
-    <View>
-        <SearchBar
-            onChangeText={(value) => setTextValue(value)}
-            value={textValue}
-        />
-        <Button color='#659dfc' title='Buscar' onPress={BuscarInvocador} />
-        {
-            !isEmpty(error) ? (
-                error.type === 404 ? (
-                    <InfoText text={`ERROR ${error.type}: Hubo un problema con la busqueda`}/>
-                ) : (
-                    <InfoText text={'No se ha encontrado ningún invocador con este nombre'}/>
-                )
-            ) : (
-                    !isEmpty(data) ? (
-                        <>
-                            <SummonerBox data={data} isOnFavourites={isTheAccountFav}/>
-                        </>
+        <>
+            <View>
+                <SearchBar
+                    onChangeText={(value) => setTextValue(value)}
+                    value={textValue}
+                />
+                <Button color='#659dfc' title='Buscar' onPress={async() => await BuscarInvocador()} />
+                {
+                    !isEmpty(error) ? (
+                        error.type === 404 ? (
+                            <InfoText text={`ERROR ${error.type}: Hubo un problema con la busqueda`} />
+                        ) : (
+                            <InfoText text={'No se ha encontrado ningún invocador con este nombre'} />
+                        )
                     ) : (
-                        
-                        <InfoText text={'Busca un Invocador con la barra de arriba'}/>
-                    ) 
-                )
-            
+                        !isEmpty(data) ? (
+                            <>
+                                <SummonerBox data={data} isOnFavourites={isTheAccountFav} />
+                            </>
+                        ) : (
 
-        }
-        
-        {/* <FlatList
+                            <InfoText text={'Busca un Invocador con la barra de arriba'} />
+                        )
+                    )
+
+
+                }
+
+                {/* <FlatListF
             data={data}
             renderItem={ItemList}
             keyExtractor={}
         /> */}
-    </View>
-  )
+            </View>
+        </>
+    )
 }
 
 export default SearchAccountView

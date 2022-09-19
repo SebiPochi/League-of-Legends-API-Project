@@ -2,27 +2,36 @@ import { StyleSheet, Text, View, Dimensions, Image, TouchableWithoutFeedback } f
 import React, { useState, useContext } from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FavAccountContext from '../Context/FavAccountContext';
+import { getChampMastery } from '../Utils/LolApiHelpers';
 
 const SummonerFavourite = ({ data }) => {
     const { deleteAccount, favAccounts } = useContext(FavAccountContext)
 
-    
+    const LogChampMastery = async () => {
+        const champMastery = await getChampMastery(data.id)
+        console.log(champMastery);
+    }
+
     const FavProfile = () => {
         deleteAccount(data)
     }
 
     return (
-        <View style={styles.container}>
-            <Image style={styles.imageIcon} source={{uri: `https://ddragon.leagueoflegends.com/cdn/12.17.1/img/profileicon/${data.profileIconId}.png`}} />
-            <View style={styles.allText}>
-                <Text style={styles.name}>{data.name}</Text>
-                <Text>Nivel: {data.summonerLevel}</Text>
-                <Text>{data.profileIconId}</Text>
-            </View>
-            <TouchableWithoutFeedback onPress={ FavProfile }>
-                <Ionicons style={styles.star} name={'star'} color='#f2c935' size={24} /> 
+            <TouchableWithoutFeedback onPress={LogChampMastery}>
+                <View style={styles.container}>
+                        <>
+                            <Image style={styles.imageIcon} source={{uri: `https://ddragon.leagueoflegends.com/cdn/12.17.1/img/profileicon/${data.profileIconId}.png`}} />
+                            <View style={styles.allText}>
+                                <Text style={styles.name}>{data.name}</Text>
+                                <Text>Nivel: {data.summonerLevel}</Text>
+                                <Text>{data.profileIconId}</Text>
+                            </View>
+                            <TouchableWithoutFeedback onPress={ FavProfile }>
+                                <Ionicons style={styles.star} name={'star'} color='#f2c935' size={24} /> 
+                            </TouchableWithoutFeedback>
+                        </>
+                </View>
             </TouchableWithoutFeedback>
-        </View>
     )
 }
 

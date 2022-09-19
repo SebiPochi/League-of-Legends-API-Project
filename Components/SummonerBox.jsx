@@ -25,14 +25,18 @@ const SummonerBox = ({ data, isOnFavourites }) => {
 
     return (
         <View style={styles.container}>
-            <Image style={styles.imageIcon} source={{uri: `https://ddragon.leagueoflegends.com/cdn/12.17.1/img/profileicon/${data.profileIconId}.png`}} />
-            <View style={styles.allText}>
-                <Text style={styles.name}>{data.name}</Text>
-                <Text>Nivel: {data.summonerLevel}</Text>
-                <Text>{data.profileIconId}</Text>
-            </View>
-            <TouchableWithoutFeedback onPress={ FavProfile }>
-                <Ionicons style={styles.star} name={isFaved ? 'star' : 'star-outline'} color='#f2c935' size={24} /> 
+            <TouchableWithoutFeedback>
+                <>
+                    <Image style={styles.imageIcon} source={{uri: `https://ddragon.leagueoflegends.com/cdn/12.17.1/img/profileicon/${data.profileIconId}.png`}} />
+                    <View style={styles.allText}>
+                        <Text style={styles.name}>{data.name}</Text>
+                        <Text>Nivel: {data.summonerLevel}</Text>
+                        <Text>{data.profileIconId}</Text>
+                    </View>
+                    <TouchableWithoutFeedback onPress={ FavProfile }>
+                        <Ionicons style={styles.star} name={isFaved ? 'star' : 'star-outline'} color='#f2c935' size={24} /> 
+                    </TouchableWithoutFeedback>
+                </>
             </TouchableWithoutFeedback>
         </View>
     )

@@ -3,13 +3,23 @@ import React, { useState, useContext } from 'react'
 import Ionicons from '@expo/vector-icons/Ionicons';
 import FavAccountContext from '../Context/FavAccountContext';
 import { getChampMastery } from '../Utils/LolApiHelpers';
+import axios from "axios"
+import { useNavigation } from '@react-navigation/native';
 
+const baseUrl = 'https://la2.api.riotgames.com/lol'
+const API_KEY = 'RGAPI-f436dce0-6069-40f4-b421-9754b5025449'
 const SummonerFavourite = ({ data }) => {
     const { deleteAccount, favAccounts } = useContext(FavAccountContext)
+    const navigation = useNavigation(); 
 
     const LogChampMastery = async () => {
-        const champMastery = await getChampMastery(data.id)
-        console.log(champMastery);
+        await axios.get(`${baseUrl}/champion-mastery/v4/champion-masteries/by-summoner/${data.id}?api_key=${API_KEY}`)
+        .then(
+            function(response){
+                navigation.navigate("ProfileDetail", {masteryData : response.data})
+            }
+        )
+        .catch(error => console.log(error))
     }
 
     const FavProfile = () => {

@@ -1,13 +1,21 @@
 import axios from "axios"
 
 const baseUrl = 'https://la2.api.riotgames.com/lol'
-const API_KEY = 'RGAPI-7bd073a4-3dd5-4d6c-b491-75cee474597b'
+const baseUrlDDragon = 'http://ddragon.leagueoflegends.com'
+const API_KEY = 'RGAPI-f436dce0-6069-40f4-b421-9754b5025449'
 
 const appendRGParams = (query) => `${baseUrl}${query}?api_key=${API_KEY}`
+const appendRGDDParams = (query) => `${baseUrlDDragon}${query}?api_key=${API_KEY}`
 
 
 export const getSummoner = async( summonerName ) => {
     const url = appendRGParams(`/summoner/v4/summoners/by-name/${summonerName}`)
+    const res = await axios.get(url)
+    return res.data
+}
+
+export const getAllChamps = async() => {
+    const url = appendRGDDParams(`/cdn/12.18.1/data/en_US/champion.json`)
     const res = await axios.get(url)
     return res.data
 }

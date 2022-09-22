@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PruebasView from './Views/PruebasView';
 import HomeView from './Views/HomeView';
 import SearchAccountView from './Views/SearchAccountView';
+import ProfileDetailView from './Views/ProfileDetailView';
 import { AccountProvider } from './Context/FavAccountContext';
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Navigator initialRouteName='Home'>
           <Stack.Screen name="Home" component={HomeView} />
           <Stack.Screen name="SearchAccount" component={SearchAccountView} />
+          <Stack.Screen name="ProfileDetail" component={ProfileDetailView} />
           <Stack.Screen name="Pruebas" component={PruebasView} />
         </Stack.Navigator>
       </NavigationContainer>

@@ -1,40 +1,45 @@
 import { StyleSheet, Text, View, LogBox } from 'react-native'
-import React, { useState } from 'react'
-import { getAllChamps } from '../Utils/LolApiHelpers'
+import React, { useEffect, useMemo, useState } from 'react'
+import { getAllChamps, getChampDetails } from '../Utils/LolApiHelpers'
 
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 
 const ProfileDetailView = ({ route }) => {
   const [allChampData, setAllChampData] = useState([])
   const { masteryData } = route.params;
-  const slicedArray = masteryData.slice(0, 4);
-  const AllChampions = getAllChamps()
+  
+  const champTopFive = masteryData.slice(0, 5);
+  
+  useEffect(() => {
+    (async () => {
+      const {data} = await getAllChamps();
+      setAllChampData(data)
+    })();
+  }, [])
 
   const isInList = (championId) => {
-    for (let prop of AllChampions) {
-      if (championId === AllChampions[prop].key) {
-        return true
-      }
-    }
-    return false
+    const champsIds = Object.values(allChampData).map(champ => ({id: parseInt(champ.key), name: champ.id}))
+    const myChamp = champsIds.filter(c => c.id === championId)[0]
+    return myChamp ? myChamp.name : "FALOPAAA"
   }
 
-  return (
+  return allChampData && (
     <View style={styles.container}>
-      <Text>{slicedArray[1].championId}</Text>
+      <Text>{champTopFive[1].championId}</Text>
       {
-        slicedArray.map((champDetail) => (
+        champTopFive.map((champDetail) => (
           <Text>{champDetail.championId}</Text>
         ))
       }
       {
-        slicedArray.forEach((champMastery => (
-          isInList(champMastery.championId) ? (
-              <Text>ESTA EN LALI ISIII</Text>
-            ) : (
-              <Text>NO ESTA EN LALI</Text>
+        champTopFive.map((champMastery => {
+          const champName = isInList(champMastery.championId)
+          const champData = getChampDetails(champName)
+          console.log(champData)
+          return champData &&(
+              <Text key={champName}>{champName}</Text>
           )
-        )))
+        }))
       }
     </View>
   )

@@ -24,8 +24,15 @@ export const getChampMastery = async( id ) => {
     const url = appendRGParams(`/champion-mastery/v4/champion-masteries/by-summoner/${id}`)
     const res = await axios.get(url)
     return res.data
-
 }
+
+export const getChampDetails = async( name ) => {
+    const url = appendRGDDParams(`/cdn/12.18.1/data/en_US/champion/${name}.json`)
+    const res = await axios.get(url)
+    return res.data
+}
+
+
 
 // PR
 

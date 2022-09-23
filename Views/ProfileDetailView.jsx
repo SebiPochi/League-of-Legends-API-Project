@@ -39,18 +39,19 @@ const ProfileDetailView = ({ route }) => {
     <View style={styles.container}>
       <Text style={styles.titulo}>Mayor Maestria</Text>
       <View style={styles.champMasteryAll}>
-        <ScrollView>
-          {
-            champTopFive.map((champMastery) => {
-              const champName = isInList(champMastery.championId)
-              const champData = champDetails(champMastery.championId)
-              return champData &&(
-                <ChampCardMastery key={champData.id} data={champData} accountData={champMastery}/>
-              )
-            })
-          }
-          <Button title={'Mas'} color={'#659dfc'}/>
-        </ScrollView>
+          <ScrollView>
+            {
+              champTopFive.map((champMastery) => {
+                const champName = isInList(champMastery.championId)
+                const champData = champDetails(champMastery.championId)
+                return champData &&(
+                  <ChampCardMastery key={champData.id} data={champData} accountData={champMastery}/>
+                )
+              })
+            }
+            <Button title={'Mas'} color={'#659dfc'}/>
+
+          </ScrollView>
       </View>
     </View>
   )
@@ -78,5 +79,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: 30,
     borderColor: 'rgba(255, 255, 255, .1)',
     elevation: 4
-  }
+  },
 })

@@ -7,7 +7,7 @@ import axios from "axios"
 import { useNavigation } from '@react-navigation/native';
 
 const baseUrl = 'https://la2.api.riotgames.com/lol'
-const API_KEY = 'RGAPI-f436dce0-6069-40f4-b421-9754b5025449'
+const API_KEY = 'RGAPI-bafb4b8d-18af-4c2f-981c-278161d16e4e'
 const SummonerFavourite = ({ data }) => {
     const { deleteAccount, favAccounts } = useContext(FavAccountContext)
     const navigation = useNavigation(); 
@@ -16,7 +16,7 @@ const SummonerFavourite = ({ data }) => {
         await axios.get(`${baseUrl}/champion-mastery/v4/champion-masteries/by-summoner/${data.id}?api_key=${API_KEY}`)
         .then(
             function(response){
-                navigation.navigate("ProfileDetail", {masteryData : response.data})
+                navigation.navigate("ProfileDetail", {masteryData: response.data})
             }
         )
         .catch(error => console.log(error))

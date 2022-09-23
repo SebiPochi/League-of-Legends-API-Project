@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, Image, Dimensions, TouchableHighlight} from 'react-native'
-import Animated, { useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
+import { StyleSheet, Text, View, Image, Dimensions, TouchableHighlight, TouchableWithoutFeedback, TouchableOpacity} from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
+
 import mastery1 from '../assets/mastery/1.png'
 import mastery2 from '../assets/mastery/2.png'
 import mastery3 from '../assets/mastery/3.png'
@@ -10,11 +11,10 @@ import mastery6 from '../assets/mastery/6.png'
 import mastery7 from '../assets/mastery/7.png'
 
 
-const ChampCardMastery = ({ data, accountData}) => {
-    const animatedValue = useSharedValue(0);
-
-    const masteryImage = (data) => {
-        switch (data) {
+const ChampCardMastery = ({ data, accountData }) => {
+    const navigation = useNavigation(); 
+    const masteryImage = (dataMastery) => {
+        switch (dataMastery) {
             case 1:
                 return mastery1
             case 2:
@@ -36,17 +36,11 @@ const ChampCardMastery = ({ data, accountData}) => {
     const dateLastTimePlayed = new Date(accountData.lastPlayTime);
 
     const championDetails = () => {
-        animatedValue = 1
+        navigation.navigate("ChampionDetail", { dataChampion: data })
     }
 
-    const animatedStyles = useAnimatedStyle(() => {
-        return {
-            transform: [{ translateX: offset.value * 255 }],
-        };
-    });
-
     return (
-        <TouchableHighlight onPress={championDetails}>
+        <TouchableOpacity activeOpacity={0.6} onPress={championDetails}>
             <View style={styles.container}>
                 <Image style={styles.imgBackground} source={{uri: `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${data.id}_0.jpg`}}/>
                 <Image style={styles.image} source={{uri: `http://ddragon.leagueoflegends.com/cdn/12.18.1/img/champion/${data.id}.png`}}/>
@@ -57,7 +51,7 @@ const ChampCardMastery = ({ data, accountData}) => {
                 </View>
                 <Image style={styles.masteryLevel} source={masteryImage(accountData.championLevel)}/>
             </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
     )
 }
 
@@ -79,7 +73,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: '#659dfc',
         borderWidth: 2,
-        elevation: 10
+        elevation: 10,
     },
     image: {
         width: 75,

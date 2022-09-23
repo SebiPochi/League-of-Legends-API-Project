@@ -10,7 +10,7 @@ import FavAccountContext from '../Context/FavAccountContext'
 import { getSummoner, getChampMastery } from '../Utils/LolApiHelpers'
 
 const SearchAccountView = () => {
-    const { isTheAccountOn, API_KEY } = useContext(FavAccountContext)
+    const { isTheAccountOn } = useContext(FavAccountContext)
     const [data, setData] = useState({})
     const [error, setError] = useState([])
     const [textValue, setTextValue] = useState("")
@@ -64,12 +64,6 @@ const SearchAccountView = () => {
 
 
                 }
-
-                {/* <FlatListF
-            data={data}
-            renderItem={ItemList}
-            keyExtractor={}
-        /> */}
             </View>
         </>
     )

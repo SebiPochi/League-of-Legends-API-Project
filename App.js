@@ -7,6 +7,7 @@ import PruebasView from './Views/PruebasView';
 import HomeView from './Views/HomeView';
 import SearchAccountView from './Views/SearchAccountView';
 import ProfileDetailView from './Views/ProfileDetailView';
+import ChampionDetailView from './Views/ChampionDetailView';
 import { AccountProvider } from './Context/FavAccountContext';
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
           <Stack.Screen name="SearchAccount" component={SearchAccountView} />
           <Stack.Screen name="ProfileDetail" component={ProfileDetailView} />
           <Stack.Screen name="Pruebas" component={PruebasView} />
+          <Stack.Screen name="ChampionDetail" component={ChampionDetailView} />
         </Stack.Navigator>
       </NavigationContainer>
     </AccountProvider>

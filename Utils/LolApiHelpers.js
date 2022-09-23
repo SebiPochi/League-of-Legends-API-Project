@@ -33,7 +33,6 @@ export const getChampDetails = async( name ) => {
 }
 
 
-
 // PR
 
 // export default { getSummoner, getChampMastery}

@@ -5,9 +5,9 @@ import FavAccountContext from '../Context/FavAccountContext';
 import { getChampMastery } from '../Utils/LolApiHelpers';
 import axios from "axios"
 import { useNavigation } from '@react-navigation/native';
+import { API_KEY } from '../Utils/LolApiHelpers';
 
 const baseUrl = 'https://la2.api.riotgames.com/lol'
-const API_KEY = 'RGAPI-bafb4b8d-18af-4c2f-981c-278161d16e4e'
 const SummonerFavourite = ({ data }) => {
     const { deleteAccount, favAccounts } = useContext(FavAccountContext)
     const navigation = useNavigation(); 

@@ -1,10 +1,9 @@
 import React, { createContext, useState } from 'react'
-
+import { API_KEY } from '../Utils/LolApiHelpers'
 const FavAccountContext = createContext()
 
 export function AccountProvider({ children }) {
     const [favAccounts, setFavAccounts] = useState([])
-    const API_KEY = 'RGAPI-7bd073a4-3dd5-4d6c-b491-75cee474597b'
     const addAccount = ( account ) => {
         setFavAccounts((prevState) => [...prevState, account ])
     }

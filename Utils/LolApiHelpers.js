@@ -2,7 +2,7 @@ import axios from "axios"
 
 const baseUrl = 'https://la2.api.riotgames.com/lol'
 const baseUrlDDragon = 'http://ddragon.leagueoflegends.com'
-const API_KEY = 'RGAPI-bafb4b8d-18af-4c2f-981c-278161d16e4e'
+export const API_KEY = 'RGAPI-37abc8ea-bd65-492c-9d24-13a44c8bcdae'
 
 const appendRGParams = (query) => `${baseUrl}${query}?api_key=${API_KEY}`
 const appendRGDDParams = (query) => `${baseUrlDDragon}${query}?api_key=${API_KEY}`
